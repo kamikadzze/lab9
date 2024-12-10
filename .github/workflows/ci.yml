@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - dev2
+  pull_request:
+    branches:
+      - main
+      - dev
+      - dev2
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Lint
+        run: npx eslint . 
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test -- --coverage
+
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Build
+        run: echo "Build steps here"
