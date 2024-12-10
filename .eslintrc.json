@@ -16,5 +16,9 @@
   "rules": {
     "@typescript-eslint/no-require-imports": "off",
     "no-undef": "off"
+  },
+  "globals": {
+    "test": "readonly",
+    "expect": "readonly"
   }
 }
